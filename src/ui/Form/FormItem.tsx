@@ -1,5 +1,6 @@
 "use client"
 
+import clsx from "clsx"
 import { type ReactNode, type ComponentProps, cloneElement } from "react"
 
 import {
@@ -16,17 +17,19 @@ export type FormItemProps = {
 	description?: ReactNode
 	children: JSX.Element
 	className?: string
+	isSingleline?: boolean
 }
 
 export const FormItem = ({
 	children,
 	label,
 	description,
-	className, // eslint-disable-next-line @typescript-eslint/no-explicit-any
+	className,
+	isSingleline, // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: FormItemProps): ComponentProps<typeof FormField<any, any>>["render"] => {
 	// eslint-disable-next-line react/display-name
 	return ({ field }) => (
-		<BaseFormItem className={className}>
+		<BaseFormItem className={clsx(className, { "flex space-x-small space-y-0": isSingleline })}>
 			<FormLabel>{label}</FormLabel>
 			<FormControl>{cloneElement(children, field)}</FormControl>
 			{description && <FormDescription>{description}</FormDescription>}

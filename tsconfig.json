@@ -25,6 +25,7 @@
 			"@ui/*": ["./src/ui/*"],
 			"@types/*": ["./src/types/*"],
 			"@types": ["./src/types"],
+			"@models/*": ["./src/models/*"],
 			"@base-ui/*": ["./src/ui/@external/*"],
 			"@/*": ["./src/*"]
 		}
