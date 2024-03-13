@@ -5,8 +5,8 @@ import { ActiveLink } from "@ui/ActiveLink"
 export const Navbar = () => {
 	return (
 		<nav>
-			<ul className="flex items-center px-3 py-2">
-				<li className="mr-4">
+			<ul className="flex items-center p-small">
+				<li className="mr-normal">
 					<ActiveLink href={ROUTES.CART}>{ROUTES.CART}</ActiveLink>
 				</li>
 			</ul>

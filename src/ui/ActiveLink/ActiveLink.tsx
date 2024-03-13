@@ -19,8 +19,8 @@ export const ActiveLink = <T extends string>({ href, children, exact = true }: P
 	return (
 		<Link
 			href={href}
-			className={clsx("flex gap-2 text-accent hover:font-bold", {
-				"border-b-2 border-current text-accent-foreground": isActive,
+			className={clsx("flex gap-small text-accent hover:font-bold", {
+				"border-b-normal border-current text-accent-foreground": isActive,
 			})}
 			aria-current={isActive ? true : undefined}
 		>

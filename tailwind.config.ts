@@ -68,6 +68,14 @@ const config = {
 					to: { height: "0" },
 				},
 			},
+			spacing: {
+				small: "0.5rem",
+				normal: "1rem",
+				"page-sm": "2rem",
+				"page-md": "4rem",
+				"page-lg": "6rem",
+			},
+			borderWidth: { normal: "0.125rem" },
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",

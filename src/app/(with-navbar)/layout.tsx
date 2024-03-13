@@ -7,7 +7,7 @@ export default function NavLayout({ children }: { children: ReactNode }) {
 		<>
 			<Navbar />
 
-			<main className="container mt-4 flex flex-col gap-4">{children}</main>
+			<main className="container mt-normal flex flex-col gap-normal">{children}</main>
 		</>
 	)
 }
