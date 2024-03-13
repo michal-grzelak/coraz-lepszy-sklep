@@ -10,17 +10,21 @@ export const mapZodErrorToValidationError = (
 	const validationErrors: ValidationError[] = []
 	const rootMessages: string[] = []
 
+	// group errors by field path
 	const errorsWithMappedPath = issues.map((issue) => ({
 		...issue,
 		path: issue.path.join("."),
 	}))
 	const errorsGrouped = groupBy(errorsWithMappedPath, (error) => error.path)
 
+	// process all zod errors into validation errors
 	for (const path in errorsGrouped) {
 		const errors = errorsGrouped[path]
+		// merge all error messages into one string for field path
 		const message = errors.map((error) => error.message).join(", ")
 
 		const propertyValue = get(value, path)
+		// if property exists, add validation error
 		if (!!propertyValue && typeof propertyValue !== "object") {
 			validationErrors.push({
 				path,
@@ -29,10 +33,12 @@ export const mapZodErrorToValidationError = (
 				fatal: !!errors[0].fatal,
 			})
 		} else {
+			// else add root message
 			rootMessages.push(message)
 		}
 	}
 
+	// merge all root messages into one string
 	if (rootMessages.length) {
 		const rootErrorMessage = rootMessages.join(", ")
 		validationErrors.push({
