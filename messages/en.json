@@ -43,6 +43,13 @@
 			},
 			"actions": { "add": "Set shipping method" }
 		},
+		"payment": {
+			"paymentMethod": {
+				"label": "Payment method",
+				"placeholder": "Payment method"
+			},
+			"actions": { "add": "Set payment method" }
+		},
 		"cart": {
 			"empty": "Cart is empty!"
 		}
