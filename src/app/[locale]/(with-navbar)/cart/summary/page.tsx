@@ -1,6 +1,6 @@
 import { SummaryPageComponent } from "@components/cart/summary/page-component"
 
-export default function SummaryMethod() {
+export default function Summary() {
 	return (
 		<>
 			<SummaryPageComponent />

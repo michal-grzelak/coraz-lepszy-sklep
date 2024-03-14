@@ -4,7 +4,8 @@
 		"/cart/shipping-address": "Shipping address",
 		"/cart/shipping-method": "Shipping method",
 		"/cart/payment-method": "Payment method",
-		"/cart/summary": "Summary"
+		"/cart/summary": "Summary",
+		"/cart/complete": "Completed!"
 	},
 	"domain": {
 		"product": {

@@ -4,4 +4,5 @@ export const ROUTES = {
 	SHIPPING_METHOD: "/cart/shipping-method",
 	PAYMENT_METHOD: "/cart/payment-method",
 	SUMMARY: "/cart/summary",
+	COMPLETE: "/cart/complete",
 }
