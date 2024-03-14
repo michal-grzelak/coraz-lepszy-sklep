@@ -21,6 +21,21 @@
 				"add": "Add product"
 			}
 		},
+		"address": {
+			"street": {
+				"label": "Street",
+				"placeholder": "Street"
+			},
+			"city": {
+				"label": "City",
+				"placeholder": "City"
+			},
+			"country": {
+				"label": "Country",
+				"placeholder": "Country"
+			},
+			"actions": { "add": "Set address" }
+		},
 		"cart": {
 			"empty": "Cart is empty!"
 		}

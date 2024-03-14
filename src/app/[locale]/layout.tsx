@@ -22,7 +22,9 @@ export default function RootLayout({
 
 	return (
 		<html lang="en">
-			<body className={`${inter.className} min-h-screen sm:px-page-sm md:px-page-md lg:px-page-lg`}>
+			<body
+				className={`${inter.className} min-h-screen sm:!px-page-sm md:!px-page-md lg:!px-page-lg`}
+			>
 				<NextIntlClientProvider locale={"en"} messages={messages} formats={i18nConfig.formats}>
 					{children}
 				</NextIntlClientProvider>
