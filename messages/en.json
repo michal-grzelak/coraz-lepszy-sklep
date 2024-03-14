@@ -36,6 +36,13 @@
 			},
 			"actions": { "add": "Set address" }
 		},
+		"shipping": {
+			"shippingMethod": {
+				"label": "Shipping method",
+				"placeholder": "Shipping method"
+			},
+			"actions": { "add": "Set shipping method" }
+		},
 		"cart": {
 			"empty": "Cart is empty!"
 		}

@@ -1,7 +1,7 @@
 "use client"
 
-import { ShippingAddressForm } from "@components/address/shipping-address-form"
-import { type TShippingAddress } from "@components/address/types"
+import { ShippingAddressForm } from "@components/shipping/shipping-address-form"
+import { type TShippingAddress } from "@components/shipping/types"
 
 import { useCartManager } from "../manager"
 

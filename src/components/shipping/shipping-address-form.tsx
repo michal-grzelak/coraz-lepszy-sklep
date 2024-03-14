@@ -9,7 +9,7 @@ import { Select } from "@ui/select"
 import { countrySelectItems, shippingAddressFormSchema } from "./constants"
 import { type TShippingAddress } from "./types"
 
-type Props = { onSubmit: (product: TShippingAddress) => void }
+type Props = { onSubmit: (address: TShippingAddress) => void }
 
 export const ShippingAddressForm = ({ onSubmit }: Props) => {
 	const t = useTranslations()
