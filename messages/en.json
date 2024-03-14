@@ -1,5 +1,13 @@
 {
 	"routes": {
 		"/cart": "Cart"
+	},
+	"domain": {
+		"product": {
+			"price": "{price, number, currency}"
+		},
+		"cart": {
+			"empty": "Cart is empty!"
+		}
 	}
 }
