@@ -5,7 +5,7 @@ type Props = {
 	no: number
 }
 
-export const CartItem = ({ product: { name, price, requiresShipping }, no }: Props) => {
+export const ProductItem = ({ product: { name, price, requiresShipping }, no }: Props) => {
 	return (
 		<section className="flex flex-row gap-normal">
 			<span>{no}.</span>

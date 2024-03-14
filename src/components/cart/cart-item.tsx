@@ -3,7 +3,7 @@ import { Trash2 } from "lucide-react"
 import { type ProductDTO } from "@models/product"
 import { Button } from "@ui/button"
 
-import { CartItem } from "./cart-item"
+import { ProductItem } from "../product/product-item"
 
 type Props = {
 	product: ProductDTO
@@ -11,10 +11,10 @@ type Props = {
 	onRemove: () => void
 }
 
-export const CartItemInteractive = ({ product, no, onRemove }: Props) => {
+export const CartItem = ({ product, no, onRemove }: Props) => {
 	return (
 		<section className="flex flex-row items-center gap-normal">
-			<CartItem product={product} no={no} />
+			<ProductItem product={product} no={no} />
 
 			<Button variant="destructive" size="icon" onClick={onRemove}>
 				<Trash2 />

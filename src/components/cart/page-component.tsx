@@ -1,9 +1,9 @@
 "use client"
 
 import { AddProductForm } from "@components/product/add-product-form"
-import { CartItemInteractive } from "@components/product/cart-item-interactive"
 import { type TAddProduct } from "@components/product/types"
 
+import { CartList } from "./cart-list"
 import { useCartManager } from "./manager"
 
 export const CartPageComponent = () => {
@@ -13,7 +13,7 @@ export const CartPageComponent = () => {
 		addProduct(product)
 	}
 
-	const handleRemove = (id: string) => () => {
+	const handleRemove = (id: string) => {
 		removeProduct(id)
 	}
 
@@ -21,14 +21,7 @@ export const CartPageComponent = () => {
 		<>
 			<AddProductForm onSubmit={handleSubmit} />
 
-			{products.map((product, index) => (
-				<CartItemInteractive
-					product={product}
-					no={index + 1}
-					onRemove={handleRemove(product.id)}
-					key={product.id}
-				/>
-			))}
+			<CartList products={products} onRemove={handleRemove} />
 		</>
 	)
 }
