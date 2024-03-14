@@ -1,6 +1,10 @@
 {
 	"routes": {
-		"/cart": "Cart"
+		"/cart": "Cart",
+		"/cart/shipping-address": "Shipping address",
+		"/cart/shipping-method": "Shipping method",
+		"/cart/payment-method": "Payment method",
+		"/cart/summary": "Summary"
 	},
 	"domain": {
 		"product": {
