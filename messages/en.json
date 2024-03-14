@@ -4,7 +4,22 @@
 	},
 	"domain": {
 		"product": {
-			"price": "{price, number, currency}"
+			"price": {
+				"value": "{price, number, currency}",
+				"label": "Price",
+				"placeholder": "Product price"
+			},
+			"name": {
+				"label": "Name",
+				"placeholder": "Product name"
+			},
+			"requiresShipping": {
+				"value": "{requiresShipping, select, true {Requires shipping} other {}}",
+				"label": "Requires shipping?"
+			},
+			"actions": {
+				"add": "Add product"
+			}
 		},
 		"cart": {
 			"empty": "Cart is empty!"

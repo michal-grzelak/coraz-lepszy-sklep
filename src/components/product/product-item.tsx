@@ -19,11 +19,13 @@ export const ProductItem = ({ product: { name, price, requiresShipping }, no }: 
 				<p className="font-bold">{name}</p>
 				<div className="flex items-center gap-small">
 					<p>
-						{t("domain.product.price", {
+						{t("domain.product.price.value", {
 							price,
 						})}
 					</p>
-					<p className="text-destructive">{requiresShipping ? "Shipping required" : ""}</p>
+					<p className="text-destructive">
+						{t("domain.product.requiresShipping.value", { requiresShipping })}
+					</p>
 				</div>
 			</div>
 		</section>

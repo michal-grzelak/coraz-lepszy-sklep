@@ -1,5 +1,7 @@
 "use client"
 
+import { useTranslations } from "next-intl"
+
 import { Checkbox } from "@ui/checkbox"
 import { Form, FormField } from "@ui/form"
 import { Input } from "@ui/input"
@@ -10,6 +12,8 @@ import { type TAddProduct } from "./types"
 type Props = { onSubmit: (product: TAddProduct) => void }
 
 export const AddProductForm = ({ onSubmit }: Props) => {
+	const t = useTranslations()
+
 	return (
 		<Form
 			schema={addProductToCartFormSchema}
@@ -19,17 +23,26 @@ export const AddProductForm = ({ onSubmit }: Props) => {
 				requiresShipping: false,
 			}}
 			onSubmit={onSubmit}
+			submitText={t("domain.product.actions.add")}
 			className="grid-cols-4"
 		>
-			<FormField name="name" label="Name" className="col-span-2 max-md:col-span-4">
-				<Input placeholder="Product name" />
+			<FormField
+				name="name"
+				label={t("domain.product.name.label")}
+				className="col-span-2 max-md:col-span-4"
+			>
+				<Input placeholder={t("domain.product.name.placeholder")} />
 			</FormField>
-			<FormField name="price" label="Price" className="col-span-2 max-md:col-span-4">
-				<Input placeholder="Price" type="number" />
+			<FormField
+				name="price"
+				label={t("domain.product.price.label")}
+				className="col-span-2 max-md:col-span-4"
+			>
+				<Input placeholder={t("domain.product.price.placeholder")} type="number" />
 			</FormField>
 			<FormField
 				name="requiresShipping"
-				label="Requires shipping?"
+				label={t("domain.product.requiresShipping.label")}
 				className="col-span-4"
 				isSingleline
 				type="checkbox"
