@@ -3,7 +3,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { type ReactNode } from "react"
-import { type Path, useForm } from "react-hook-form"
+import { type Path, useForm, type DefaultValues } from "react-hook-form"
 import { type z, type ZodSchema } from "zod"
 
 import { FormProvider } from "@base-ui/form"
@@ -15,7 +15,7 @@ import { RootFormMessage } from "./root-form-message"
 
 type Props<T extends ZodSchema<any, any>> = {
 	schema: T
-	defaultValues: z.infer<T>
+	defaultValues: DefaultValues<z.infer<T>>
 	onSubmit: (
 		value: z.infer<T>,
 	) => Promise<void | { errors: ValidationError[] }> | (void | { errors: ValidationError[] })

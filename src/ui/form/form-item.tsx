@@ -21,7 +21,7 @@ export type FormItemProps = {
 	children: JSX.Element
 	className?: string
 	isSingleline?: boolean
-	type?: "default" | "checkbox"
+	type?: "default" | "checkbox" | "select"
 }
 
 // map react-hook-form value to different input types
@@ -30,6 +30,8 @@ const mapFieldToInputProps = (
 	type: FormItemProps["type"],
 ) => {
 	switch (type) {
+		case "select":
+			return { ...field, value: value, onSelect: onChange }
 		case "checkbox":
 			return { ...field, checked: !!value, onCheckedChange: onChange }
 		case "default":
