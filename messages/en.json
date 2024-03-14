@@ -26,6 +26,7 @@
 			}
 		},
 		"address": {
+			"empty": "No address!",
 			"street": {
 				"label": "Street",
 				"placeholder": "Street"
@@ -42,6 +43,7 @@
 		},
 		"shipping": {
 			"shippingMethod": {
+				"skipped": "Skipped!",
 				"label": "Shipping method",
 				"placeholder": "Shipping method"
 			},
@@ -49,6 +51,7 @@
 		},
 		"payment": {
 			"paymentMethod": {
+				"skipped": "Skipped!",
 				"label": "Payment method",
 				"placeholder": "Payment method"
 			},

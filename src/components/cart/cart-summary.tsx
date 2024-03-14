@@ -7,12 +7,12 @@ import { type ProductDTO } from "@models/product"
 
 type Props = { products: ProductDTO[] }
 
-export const ProductsSummary = ({ products }: Props) => {
+export const CartSummary = ({ products }: Props) => {
 	const t = useTranslations()
 
 	return (
-		<section className="flex flex-row">
-			<h2>{t(`routes.${ROUTES.CART}`)}</h2>
+		<section className="flex flex-row gap-normal">
+			<h2>{t(`routes.${ROUTES.CART}`)}:</h2>
 			<div className="flex flex-col">
 				{products.map((product, index) => (
 					<ProductItem product={product} no={index + 1} key={product.id} />
