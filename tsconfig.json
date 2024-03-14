@@ -18,6 +18,15 @@
 			}
 		],
 		"paths": {
+			"@lib/*": ["./src/lib/*"],
+			"@providers/*": ["./src/providers/*"],
+			"@components/*": ["./src/components/*"],
+			"@ui": ["./src/ui"],
+			"@ui/*": ["./src/ui/*"],
+			"@types/*": ["./src/types/*"],
+			"@types": ["./src/types"],
+			"@models/*": ["./src/models/*"],
+			"@base-ui/*": ["./src/ui/@external/*"],
 			"@/*": ["./src/*"]
 		}
 	},
