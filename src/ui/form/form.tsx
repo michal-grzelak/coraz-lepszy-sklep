@@ -22,7 +22,6 @@ type Props<T extends ZodSchema<any, any>> = {
 	children: ReactNode
 	submitText?: string
 	className?: string
-	"data-testid"?: string
 }
 
 export const Form = <T extends ZodSchema<any, any>>({
@@ -36,6 +35,7 @@ export const Form = <T extends ZodSchema<any, any>>({
 	const form = useForm<T>({
 		resolver: zodResolver(schema),
 		defaultValues,
+		mode: "onTouched",
 	})
 
 	const _onSubmit = async (value: z.infer<T>) => {
@@ -57,7 +57,7 @@ export const Form = <T extends ZodSchema<any, any>>({
 		<FormProvider {...form}>
 			<form
 				onSubmit={form.handleSubmit(_onSubmit)}
-				className={cn("grid grid-flow-row gap-4", className)}
+				className={cn("grid grid-flow-row gap-normal", className)}
 			>
 				{children}
 				<RootFormMessage />
