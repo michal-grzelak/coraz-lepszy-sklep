@@ -6,8 +6,7 @@ import { ROUTES } from "@/routes"
 
 import { ShippingAddressForm } from "@components/shipping/shipping-address-form"
 import { type TShippingAddress } from "@components/shipping/types"
-
-import { useCartManager } from "../manager"
+import { useCartManager } from "@state/cart/manager"
 
 export const ShippingAddressPageComponent = () => {
 	const t = useTranslations()

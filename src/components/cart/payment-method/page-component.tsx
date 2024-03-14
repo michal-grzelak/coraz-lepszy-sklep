@@ -6,8 +6,7 @@ import { ROUTES } from "@/routes"
 
 import { PaymentMethodForm } from "@components/payment/payment-method-form"
 import { type TPaymentMethod } from "@components/payment/types"
-
-import { useCartManager } from "../manager"
+import { useCartManager } from "@state/cart/manager"
 
 export const PaymentMethodPageComponent = () => {
 	const t = useTranslations()

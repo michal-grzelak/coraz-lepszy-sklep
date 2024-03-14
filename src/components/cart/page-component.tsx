@@ -6,9 +6,9 @@ import { ROUTES } from "@/routes"
 
 import { AddProductForm } from "@components/product/add-product-form"
 import { type TAddProduct } from "@components/product/types"
+import { useCartManager } from "@state/cart/manager"
 
 import { CartList } from "./cart-list"
-import { useCartManager } from "./manager"
 
 export const CartPageComponent = () => {
 	const t = useTranslations()

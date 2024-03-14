@@ -7,9 +7,9 @@ import { ROUTES } from "@/routes"
 import { PaymentMethodSummary } from "@components/payment/payment-method-summary"
 import { ShippingAddressSummary } from "@components/shipping/shipping-address-summary"
 import { ShippingMethodSummary } from "@components/shipping/shipping-method-summary"
+import { useCartManager } from "@state/cart/manager"
 
 import { CartSummary } from "../cart-summary"
-import { useCartManager } from "../manager"
 
 export const SummaryPageComponent = () => {
 	const t = useTranslations()
