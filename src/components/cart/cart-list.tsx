@@ -9,6 +9,14 @@ export const CartList = ({ products, onRemove }: Props) => {
 		onRemove(id)
 	}
 
+	if (!products.length) {
+		return (
+			<section className="flex h-full flex-grow items-center justify-center">
+				<h2>No products!</h2>
+			</section>
+		)
+	}
+
 	return products.map((product, index) => (
 		<CartItem
 			product={product}
