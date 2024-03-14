@@ -9,9 +9,9 @@ import { type z, type ZodSchema } from "zod"
 import { FormProvider } from "@base-ui/form"
 import { cn } from "@lib/utils"
 import { type ValidationError } from "@types"
-import { Button } from "@ui/Button"
+import { Button } from "@ui/button"
 
-import { RootFormMessage } from "./RootFormMessage"
+import { RootFormMessage } from "./root-form-message"
 
 type Props<T extends ZodSchema<any, any>> = {
 	schema: T

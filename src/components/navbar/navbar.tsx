@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl"
 
 import { ROUTES } from "@/routes"
 
-import { ActiveLink } from "@ui/ActiveLink"
+import { ActiveLink } from "@ui/active-link"
 
 export const Navbar = () => {
 	const t = useTranslations()

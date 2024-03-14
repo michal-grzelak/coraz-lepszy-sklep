@@ -1,9 +1,9 @@
 "use client"
-import { type ProductDTO } from "@models/Product"
 
-import { Checkbox } from "@ui/Checkbox"
-import { Form, FormField } from "@ui/Form"
-import { Input } from "@ui/Input"
+import { type ProductDTO } from "@models/product"
+import { Checkbox } from "@ui/checkbox"
+import { Form, FormField } from "@ui/form"
+import { Input } from "@ui/input"
 
 import { addProductToCartFormSchema } from "./constants"
 

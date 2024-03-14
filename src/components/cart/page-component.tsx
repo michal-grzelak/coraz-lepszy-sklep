@@ -1,8 +1,7 @@
 "use client"
 
-import { type ProductDTO } from "@models/Product"
-
-import { AddProductForm } from "@components/Product/AddProductForm"
+import { AddProductForm } from "@components/product/add-product-form"
+import { type ProductDTO } from "@models/product"
 
 export const CartPageComponent = () => {
 	const handleSubmit = (product: ProductDTO) => {

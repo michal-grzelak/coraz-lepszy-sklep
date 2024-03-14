@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form"
 
 import { FormField as BaseFormField } from "@base-ui/form"
 
-import { type FormItemProps, FormItem } from "./FormItem"
+import { type FormItemProps, FormItem } from "./form-item"
 
 type Props = { name: string } & FormItemProps
 
