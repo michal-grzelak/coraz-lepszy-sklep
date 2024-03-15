@@ -22,15 +22,20 @@ export const CartNavigation = () => {
 
 	return (
 		<nav>
-			<ul className="flex justify-center gap-normal">
-				{routes.map((route) => {
+			<ul className="flex justify-center gap-normal max-md:flex-col max-md:items-center">
+				{routes.map((route, index) => {
 					const disabled = !allowedRoutes[route.checkKey]
 
 					return (
-						<li key={route.route}>
-							<Button variant="default" disabled={disabled} asChild={!disabled}>
+						<li className="max-md:w-full" key={route.route}>
+							<Button
+								variant="default"
+								disabled={disabled}
+								asChild={!disabled}
+								className="max-md:w-full"
+							>
 								<ActiveLink href={route.route} disabled={disabled}>
-									{t(`routes.${route.route}`)}
+									{index + 1}. {t(`routes.${route.route}`)}
 								</ActiveLink>
 							</Button>
 						</li>
