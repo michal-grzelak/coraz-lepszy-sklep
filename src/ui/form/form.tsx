@@ -61,7 +61,12 @@ export const Form = <T extends ZodSchema<any, any>>({
 			>
 				{children}
 				<RootFormMessage />
-				<Button loading={form.formState.isSubmitting} className="col-span-full !mt-8">
+				<Button
+					loading={form.formState.isSubmitting}
+					disabled={!form.formState.isValid}
+					aria-disabled={!form.formState.isValid}
+					className="col-span-full !mt-8"
+				>
 					{submitText}
 				</Button>
 			</form>
