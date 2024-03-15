@@ -28,6 +28,7 @@
 			"@models/*": ["./src/models/*"],
 			"@base-ui/*": ["./src/ui/@external/*"],
 			"@state/*": ["./src/state/*"],
+			"@api/*": ["./src/api/*"],
 			"@/*": ["./src/*"]
 		}
 	},

@@ -1,5 +1,6 @@
 "use client"
 
+import { usePostCart } from "@api/cartApi"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 
@@ -15,13 +16,20 @@ import { CartSummary } from "../cart-summary"
 
 export const SummaryPageComponent = () => {
 	const t = useTranslations()
-	const { products, address, shippingMethod, paymentMethod, complete } = useCartManager()
 	const router = useRouter()
+	const { products, address, shippingMethod, paymentMethod, complete } = useCartManager()
+	const { mutate: submitCart, isPending } = usePostCart()
 
 	const handleSubmit = () => {
-		console.log({ products, address, shippingMethod, paymentMethod })
-		complete()
-		router.push(ROUTES.COMPLETE)
+		submitCart(
+			{ products, address: address!, shippingMethod, paymentMethod },
+			{
+				onSuccess: () => {
+					complete()
+					router.push(ROUTES.COMPLETE)
+				},
+			},
+		)
 	}
 
 	return (
@@ -36,7 +44,9 @@ export const SummaryPageComponent = () => {
 
 			<PaymentMethodSummary paymentMethod={paymentMethod} />
 
-			<Button onClick={handleSubmit}>{t("common.submit")}</Button>
+			<Button onClick={handleSubmit} loading={isPending}>
+				{t("common.submit")}
+			</Button>
 		</>
 	)
 }
