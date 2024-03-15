@@ -10,8 +10,8 @@ export const ShippingAddressSummary = ({ address }: Props) => {
 	const t = useTranslations()
 
 	return (
-		<section className="flex flex-row gap-normal">
-			<h2>{t(`routes.${ROUTES.SHIPPING_ADDRESS}`)}:</h2>
+		<section className="grid grid-flow-row grid-cols-4 gap-normal">
+			<h2 className="col-span-1">{t(`routes.${ROUTES.SHIPPING_ADDRESS}`)}:</h2>
 			{address ? (
 				<div className="flex flex-col">
 					<div className="flex flex-row items-center gap-small">

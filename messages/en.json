@@ -7,6 +7,7 @@
 		"/cart/summary": "Summary",
 		"/cart/complete": "Completed!"
 	},
+	"common": { "submit": "Submit", "loading": "Loading..." },
 	"domain": {
 		"product": {
 			"price": {
@@ -48,7 +49,7 @@
 				"label": "Shipping method",
 				"placeholder": "Shipping method"
 			},
-			"actions": { "add": "Set shipping method" }
+			"actions": { "add": "Set shipping method", "skip": "Skip shipping" }
 		},
 		"payment": {
 			"paymentMethod": {
@@ -56,7 +57,7 @@
 				"label": "Payment method",
 				"placeholder": "Payment method"
 			},
-			"actions": { "add": "Set payment method" }
+			"actions": { "add": "Set payment method", "skip": "Skip payment" }
 		},
 		"cart": {
 			"empty": "Cart is empty!"

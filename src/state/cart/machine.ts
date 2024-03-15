@@ -52,6 +52,15 @@ export const cartMachine = setup({
 			paymentMethod: () => undefined,
 		}),
 	},
+	guards: {
+		canSkipShipping: ({ context }) => {
+			if (context.products.some((product) => product.requiresShipping)) {
+				return false
+			}
+
+			return true
+		},
+	},
 }).createMachine({
 	id: "cart",
 	initial: CartMachineState.CART,
@@ -85,6 +94,7 @@ export const cartMachine = setup({
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					guard: "canSkipShipping",
 					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 			},
@@ -101,6 +111,7 @@ export const cartMachine = setup({
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					guard: "canSkipShipping",
 					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
@@ -125,6 +136,7 @@ export const cartMachine = setup({
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					guard: "canSkipShipping",
 					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
@@ -149,6 +161,7 @@ export const cartMachine = setup({
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					guard: "canSkipShipping",
 					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
@@ -176,6 +189,7 @@ export const cartMachine = setup({
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					guard: "canSkipShipping",
 					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {

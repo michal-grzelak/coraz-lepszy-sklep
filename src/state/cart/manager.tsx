@@ -25,6 +25,7 @@ export type CartState = Pick<
 		canGoToShipmentMethod: boolean
 		canGoToPaymentMethod: boolean
 		canGoToSummary: boolean
+		canSkipShipping: boolean
 	}
 	addProduct: (product: TAddProduct) => void
 	removeProduct: (id: string) => void
@@ -33,6 +34,7 @@ export type CartState = Pick<
 	skipShipping: () => void
 	setPaymentMethod: (paymentMethod: TPaymentMethod) => void
 	skipPayment: () => void
+	complete: () => void
 }
 
 const useCreateCartState = (): CartState => {
@@ -66,6 +68,10 @@ const useCreateCartState = (): CartState => {
 		send({ type: EventType.SKIP_PAYMENT })
 	}
 
+	const complete = () => {
+		send({ type: EventType.COMPLETE })
+	}
+
 	const allowedRoutes: CartState["allowedRoutes"] = useMemo(
 		() => ({
 			canGoToCart: state.value === CartMachineState.CART,
@@ -73,6 +79,7 @@ const useCreateCartState = (): CartState => {
 			canGoToShipmentMethod: state.can({ type: EventType.SELECT_SHIPPING } as CartMachineEvent),
 			canGoToPaymentMethod: state.can({ type: EventType.SELECT_PAYMENT } as CartMachineEvent),
 			canGoToSummary: state.can({ type: EventType.COMPLETE } as CartMachineEvent),
+			canSkipShipping: state.can({ type: EventType.SKIP_SHIPPING } as CartMachineEvent),
 		}),
 		[state.value, state.can],
 	)
@@ -87,6 +94,7 @@ const useCreateCartState = (): CartState => {
 		skipShipping,
 		setPaymentMethod,
 		skipPayment,
+		complete,
 	}
 }
 

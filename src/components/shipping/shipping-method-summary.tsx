@@ -10,8 +10,8 @@ export const ShippingMethodSummary = ({ shippingMethod }: Props) => {
 	const t = useTranslations()
 
 	return (
-		<section className="flex flex-row gap-normal">
-			<h2>{t(`routes.${ROUTES.SHIPPING_METHOD}`)}:</h2>
+		<section className="grid grid-flow-row grid-cols-4 gap-normal">
+			<h2 className="col-span-1">{t(`routes.${ROUTES.SHIPPING_METHOD}`)}:</h2>
 			<p>{shippingMethod ?? t("domain.shipping.shippingMethod.skipped")}</p>
 		</section>
 	)

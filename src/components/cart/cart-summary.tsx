@@ -11,8 +11,8 @@ export const CartSummary = ({ products }: Props) => {
 	const t = useTranslations()
 
 	return (
-		<section className="flex flex-row gap-normal">
-			<h2>{t(`routes.${ROUTES.CART}`)}:</h2>
+		<section className="grid grid-flow-row grid-cols-4 gap-normal">
+			<h2 className="col-span-1">{t(`routes.${ROUTES.CART}`)}:</h2>
 			<div className="flex flex-col">
 				{products.map((product, index) => (
 					<ProductItem product={product} no={index + 1} key={product.id} />

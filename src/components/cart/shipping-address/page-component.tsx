@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 
 import { ROUTES } from "@/routes"
@@ -11,11 +12,13 @@ import { useCartManager } from "@state/cart/manager"
 export const ShippingAddressPageComponent = () => {
 	const t = useTranslations()
 	const { setAddress } = useCartManager()
+	const router = useRouter()
 
 	const handleSubmit = (address: TShippingAddress) => {
 		setAddress(address)
+		router.push(ROUTES.SHIPPING_METHOD)
 	}
-
+	8
 	return (
 		<>
 			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_ADDRESS}`)}</h1>
