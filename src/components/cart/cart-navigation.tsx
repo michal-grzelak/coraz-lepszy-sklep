@@ -23,7 +23,7 @@ export const CartNavigation = () => {
 	return (
 		<nav>
 			<ul
-				className={`md:grid md:gap-normal md:grid-cols-${routes.length} max-md:flex max-md:flex-col max-md:gap-small`}
+				className={`max-md:flex max-md:flex-col max-md:gap-small md:grid md:grid-cols-5 md:gap-normal`}
 			>
 				{routes.map((route, index) => {
 					const disabled = !allowedRoutes[route.checkKey]

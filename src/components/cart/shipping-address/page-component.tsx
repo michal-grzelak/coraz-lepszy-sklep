@@ -11,7 +11,7 @@ import { useCartManager } from "@state/cart/manager"
 
 export const ShippingAddressPageComponent = () => {
 	const t = useTranslations()
-	const { setAddress } = useCartManager()
+	const { setAddress, address } = useCartManager()
 	const router = useRouter()
 
 	const handleSubmit = (address: TShippingAddress) => {
@@ -23,7 +23,7 @@ export const ShippingAddressPageComponent = () => {
 		<>
 			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_ADDRESS}.title`)}</h1>
 
-			<ShippingAddressForm onSubmit={handleSubmit} />
+			<ShippingAddressForm onSubmit={handleSubmit} initial={address} />
 		</>
 	)
 }

@@ -4,15 +4,20 @@ import { useTranslations } from "next-intl"
 import { useMemo } from "react"
 
 import { type Country } from "@models/address"
+import { type ShippingMethod } from "@models/shipping"
 import { Form, FormField } from "@ui/form"
 import { Select } from "@ui/select"
 
 import { getShippingMethodSelectItems, shippingMethodFormSchema } from "./constants"
 import { type TShippingMethod } from "./types"
 
-type Props = { onSubmit: (shippingMethod: TShippingMethod) => void; selectedCountry?: Country }
+type Props = {
+	onSubmit: (shippingMethod: TShippingMethod) => void
+	selectedCountry?: Country
+	initial?: ShippingMethod
+}
 
-export const ShippingMethodForm = ({ onSubmit, selectedCountry }: Props) => {
+export const ShippingMethodForm = ({ onSubmit, selectedCountry, initial }: Props) => {
 	const t = useTranslations()
 
 	const shippingMethodSelectItems = useMemo(
@@ -23,7 +28,7 @@ export const ShippingMethodForm = ({ onSubmit, selectedCountry }: Props) => {
 	return (
 		<Form
 			schema={shippingMethodFormSchema}
-			defaultValues={{}}
+			defaultValues={initial ? { shippingMethod: initial } : {}}
 			onSubmit={onSubmit}
 			submitText={t("domain.shipping.actions.add")}
 			className="grid-cols-4"

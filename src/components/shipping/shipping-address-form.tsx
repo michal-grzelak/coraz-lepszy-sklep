@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl"
 
+import { type Address } from "@models/address"
 import { Form, FormField } from "@ui/form"
 import { Input } from "@ui/input"
 import { Select } from "@ui/select"
@@ -9,18 +10,20 @@ import { Select } from "@ui/select"
 import { countrySelectItems, shippingAddressFormSchema } from "./constants"
 import { type TShippingAddress } from "./types"
 
-type Props = { onSubmit: (address: TShippingAddress) => void }
+type Props = { onSubmit: (address: TShippingAddress) => void; initial?: Address }
 
-export const ShippingAddressForm = ({ onSubmit }: Props) => {
+export const ShippingAddressForm = ({ onSubmit, initial }: Props) => {
 	const t = useTranslations()
 
 	return (
 		<Form
 			schema={shippingAddressFormSchema}
-			defaultValues={{
-				city: "",
-				street: "",
-			}}
+			defaultValues={
+				initial ?? {
+					city: "",
+					street: "",
+				}
+			}
 			onSubmit={onSubmit}
 			submitText={t("domain.address.actions.add")}
 			className="grid-cols-4"

@@ -12,7 +12,7 @@ import { Button } from "@ui/button"
 
 export const PaymentMethodPageComponent = () => {
 	const t = useTranslations()
-	const { setPaymentMethod, skipPayment: _skipPayment } = useCartManager()
+	const { setPaymentMethod, skipPayment: _skipPayment, paymentMethod } = useCartManager()
 	const router = useRouter()
 
 	const handleSubmit = (paymentMethod: TPaymentMethod) => {
@@ -29,7 +29,7 @@ export const PaymentMethodPageComponent = () => {
 		<>
 			<h1 className="font-bold">{t(`routes.${ROUTES.PAYMENT_METHOD}.title`)}</h1>
 
-			<PaymentMethodForm onSubmit={handleSubmit} />
+			<PaymentMethodForm onSubmit={handleSubmit} initial={paymentMethod} />
 
 			<Button onClick={skipPayment}>{t("domain.payment.actions.skip")}</Button>
 		</>

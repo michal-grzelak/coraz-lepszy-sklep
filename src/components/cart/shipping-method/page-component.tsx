@@ -16,6 +16,7 @@ export const ShippingMethodPageComponent = () => {
 		setShippingMethod,
 		skipShipping: _skipShipping,
 		address,
+		shippingMethod,
 		allowedRoutes: { canSkipShipping },
 	} = useCartManager()
 	const router = useRouter()
@@ -34,7 +35,11 @@ export const ShippingMethodPageComponent = () => {
 		<>
 			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_METHOD}.title`)}</h1>
 
-			<ShippingMethodForm onSubmit={handleSubmit} selectedCountry={address?.country} />
+			<ShippingMethodForm
+				onSubmit={handleSubmit}
+				selectedCountry={address?.country}
+				initial={shippingMethod}
+			/>
 
 			<Button onClick={skipShipping} disabled={!canSkipShipping}>
 				{t("domain.shipping.actions.skip")}

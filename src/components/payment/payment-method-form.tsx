@@ -2,21 +2,25 @@
 
 import { useTranslations } from "next-intl"
 
+import { type PaymentMethod } from "@models/payment"
 import { Form, FormField } from "@ui/form"
 import { Select } from "@ui/select"
 
 import { paymentMethodFormSchema, paymentMethodSelectItems } from "./constants"
 import { type TPaymentMethod } from "./types"
 
-type Props = { onSubmit: (shippingMethod: TPaymentMethod) => void }
+type Props = {
+	onSubmit: (shippingMethod: TPaymentMethod) => void
+	initial?: PaymentMethod
+}
 
-export const PaymentMethodForm = ({ onSubmit }: Props) => {
+export const PaymentMethodForm = ({ onSubmit, initial }: Props) => {
 	const t = useTranslations()
 
 	return (
 		<Form
 			schema={paymentMethodFormSchema}
-			defaultValues={{}}
+			defaultValues={initial ? { paymentMethod: initial } : {}}
 			onSubmit={onSubmit}
 			submitText={t("domain.payment.actions.add")}
 			className="grid-cols-4"
