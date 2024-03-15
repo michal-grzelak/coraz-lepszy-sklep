@@ -1,10 +1,17 @@
 {
 	"routes": {
-		"/cart": "Cart"
+		"/cart": { "title": "Cart", "navigation": "Cart" },
+		"/cart/shipping-address": { "title": "Shipping address", "navigation": "Address" },
+		"/cart/shipping-method": { "title": "Shipping method", "navigation": "Shipping" },
+		"/cart/payment-method": { "title": "Payment method", "navigation": "Payment" },
+		"/cart/summary": { "title": "Summary", "navigation": "Summary" },
+		"/cart/complete": { "title": "Completed!" }
 	},
+	"common": { "submit": "Submit", "loading": "Loading..." },
 	"domain": {
 		"product": {
 			"price": {
+				"total": "Total: {price, number, currency}",
 				"value": "{price, number, currency}",
 				"label": "Price",
 				"placeholder": "Product price"
@@ -20,6 +27,38 @@
 			"actions": {
 				"add": "Add product"
 			}
+		},
+		"address": {
+			"empty": "No address!",
+			"street": {
+				"label": "Street",
+				"placeholder": "Street"
+			},
+			"city": {
+				"label": "City",
+				"placeholder": "City"
+			},
+			"country": {
+				"label": "Country",
+				"placeholder": "Country"
+			},
+			"actions": { "add": "Set address" }
+		},
+		"shipping": {
+			"shippingMethod": {
+				"skipped": "Skipped!",
+				"label": "Shipping method",
+				"placeholder": "Shipping method"
+			},
+			"actions": { "add": "Set shipping method", "skip": "Skip shipping" }
+		},
+		"payment": {
+			"paymentMethod": {
+				"skipped": "Skipped!",
+				"label": "Payment method",
+				"placeholder": "Payment method"
+			},
+			"actions": { "add": "Set payment method", "skip": "Skip payment" }
 		},
 		"cart": {
 			"empty": "Cart is empty!"

@@ -15,10 +15,12 @@ type Props = {
 
 export const CartItem = ({ product, no, onRemove }: Props) => {
 	return (
-		<section className="flex flex-row items-center gap-normal">
-			<ProductItem product={product} no={no} />
+		<section className="grid grid-cols-4 gap-normal">
+			<span className="col-span-3">
+				<ProductItem product={product} no={no} />
+			</span>
 
-			<Button variant="destructive" size="icon" onClick={onRemove}>
+			<Button variant="destructive" size="icon" onClick={onRemove} className="justify-self-end">
 				<Trash2 />
 			</Button>
 		</section>

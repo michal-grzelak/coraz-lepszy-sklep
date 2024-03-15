@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google"
-import { NextIntlClientProvider, useMessages } from "next-intl"
 
-import { i18nConfig } from "@/i18n"
+import { NextIntlProvider } from "@providers/next-intl"
+import { ReactQueryProvider } from "@providers/react-query"
 
 import type { Metadata } from "next"
 
@@ -18,14 +18,14 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
-	const messages = useMessages()
-
 	return (
 		<html lang="en">
-			<body className={`${inter.className} min-h-screen sm:px-page-sm md:px-page-md lg:px-page-lg`}>
-				<NextIntlClientProvider locale={"en"} messages={messages} formats={i18nConfig.formats}>
-					{children}
-				</NextIntlClientProvider>
+			<body
+				className={`${inter.className} min-h-screen sm:!px-page-sm md:!px-page-md lg:!px-page-lg`}
+			>
+				<NextIntlProvider>
+					<ReactQueryProvider>{children}</ReactQueryProvider>
+				</NextIntlProvider>
 			</body>
 		</html>
 	)

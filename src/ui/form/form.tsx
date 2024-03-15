@@ -3,11 +3,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { type ReactNode } from "react"
-import { type Path, useForm } from "react-hook-form"
+import { type Path, useForm, type DefaultValues } from "react-hook-form"
 import { type z, type ZodSchema } from "zod"
 
 import { FormProvider } from "@base-ui/form"
-import { cn } from "@lib/utils"
+import { cn } from "@lib/cn"
 import { type ValidationError } from "@types"
 import { Button } from "@ui/button"
 
@@ -15,7 +15,7 @@ import { RootFormMessage } from "./root-form-message"
 
 type Props<T extends ZodSchema<any, any>> = {
 	schema: T
-	defaultValues: z.infer<T>
+	defaultValues: DefaultValues<z.infer<T>>
 	onSubmit: (
 		value: z.infer<T>,
 	) => Promise<void | { errors: ValidationError[] }> | (void | { errors: ValidationError[] })
@@ -61,7 +61,12 @@ export const Form = <T extends ZodSchema<any, any>>({
 			>
 				{children}
 				<RootFormMessage />
-				<Button loading={form.formState.isSubmitting} className="col-span-full !mt-8">
+				<Button
+					loading={form.formState.isSubmitting}
+					disabled={!form.formState.isValid}
+					aria-disabled={!form.formState.isValid}
+					className="col-span-full !mt-8"
+				>
 					{submitText}
 				</Button>
 			</form>
