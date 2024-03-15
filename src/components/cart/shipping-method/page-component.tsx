@@ -32,7 +32,7 @@ export const ShippingMethodPageComponent = () => {
 
 	return (
 		<>
-			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_METHOD}`)}</h1>
+			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_METHOD}.title`)}</h1>
 
 			<ShippingMethodForm onSubmit={handleSubmit} selectedCountry={address?.country} />
 

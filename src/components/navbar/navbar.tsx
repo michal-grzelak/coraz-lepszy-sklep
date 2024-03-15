@@ -12,7 +12,7 @@ export const Navbar = () => {
 			<ul className="flex items-center p-small">
 				<li className="mr-normal">
 					<ActiveLink href={ROUTES.CART} exact={false}>
-						{t(`routes.${ROUTES.CART}`)}
+						{t(`routes.${ROUTES.CART}.title`)}
 					</ActiveLink>
 				</li>
 			</ul>

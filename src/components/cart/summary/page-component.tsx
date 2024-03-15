@@ -1,11 +1,11 @@
 "use client"
 
-import { usePostCart } from "@api/cartApi"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 
 import { ROUTES } from "@/routes"
 
+import { usePostCart } from "@api/cartApi"
 import { PaymentMethodSummary } from "@components/payment/payment-method-summary"
 import { ShippingAddressSummary } from "@components/shipping/shipping-address-summary"
 import { ShippingMethodSummary } from "@components/shipping/shipping-method-summary"
@@ -34,7 +34,7 @@ export const SummaryPageComponent = () => {
 
 	return (
 		<>
-			<h1 className="text-3xl font-bold">{t(`routes.${ROUTES.SUMMARY}`)}</h1>
+			<h1 className="text-3xl font-bold">{t(`routes.${ROUTES.SUMMARY}.title`)}</h1>
 
 			<CartSummary products={products} />
 

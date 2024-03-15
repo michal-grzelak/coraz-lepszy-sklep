@@ -24,7 +24,7 @@ export const CartPageComponent = () => {
 
 	return (
 		<>
-			<h1 className="font-bold">{t(`routes.${ROUTES.CART}`)}</h1>
+			<h1 className="font-bold">{t(`routes.${ROUTES.CART}.title`)}</h1>
 
 			<AddProductForm onSubmit={handleSubmit} />
 

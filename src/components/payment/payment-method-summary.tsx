@@ -11,7 +11,7 @@ export const PaymentMethodSummary = ({ paymentMethod }: Props) => {
 
 	return (
 		<section className="grid grid-flow-row grid-cols-4 gap-normal">
-			<h2 className="col-span-1">{t(`routes.${ROUTES.PAYMENT_METHOD}`)}:</h2>
+			<h2 className="col-span-1">{t(`routes.${ROUTES.PAYMENT_METHOD}.title`)}:</h2>
 			<p>{paymentMethod ?? t("domain.payment.paymentMethod.skipped")}</p>
 		</section>
 	)

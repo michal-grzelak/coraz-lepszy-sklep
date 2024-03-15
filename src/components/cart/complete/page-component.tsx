@@ -9,7 +9,7 @@ export const CompletePageComponent = () => {
 
 	return (
 		<section className="flex flex-grow items-center justify-center">
-			<h1 className="text-5xl font-bold">{t(`routes.${ROUTES.COMPLETE}`)}</h1>
+			<h1 className="text-5xl font-bold">{t(`routes.${ROUTES.COMPLETE}.title`)}</h1>
 		</section>
 	)
 }

@@ -27,7 +27,7 @@ export const PaymentMethodPageComponent = () => {
 
 	return (
 		<>
-			<h1 className="font-bold">{t(`routes.${ROUTES.PAYMENT_METHOD}`)}</h1>
+			<h1 className="font-bold">{t(`routes.${ROUTES.PAYMENT_METHOD}.title`)}</h1>
 
 			<PaymentMethodForm onSubmit={handleSubmit} />
 

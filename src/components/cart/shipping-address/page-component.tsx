@@ -21,7 +21,7 @@ export const ShippingAddressPageComponent = () => {
 	8
 	return (
 		<>
-			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_ADDRESS}`)}</h1>
+			<h1 className="font-bold">{t(`routes.${ROUTES.SHIPPING_ADDRESS}.title`)}</h1>
 
 			<ShippingAddressForm onSubmit={handleSubmit} />
 		</>

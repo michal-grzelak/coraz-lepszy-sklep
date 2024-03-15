@@ -11,7 +11,7 @@ export const ShippingMethodSummary = ({ shippingMethod }: Props) => {
 
 	return (
 		<section className="grid grid-flow-row grid-cols-4 gap-normal">
-			<h2 className="col-span-1">{t(`routes.${ROUTES.SHIPPING_METHOD}`)}:</h2>
+			<h2 className="col-span-1">{t(`routes.${ROUTES.SHIPPING_METHOD}.title`)}:</h2>
 			<p>{shippingMethod ?? t("domain.shipping.shippingMethod.skipped")}</p>
 		</section>
 	)

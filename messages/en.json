@@ -1,11 +1,11 @@
 {
 	"routes": {
-		"/cart": "Cart",
-		"/cart/shipping-address": "Shipping address",
-		"/cart/shipping-method": "Shipping method",
-		"/cart/payment-method": "Payment method",
-		"/cart/summary": "Summary",
-		"/cart/complete": "Completed!"
+		"/cart": { "title": "Cart", "navigation": "Cart" },
+		"/cart/shipping-address": { "title": "Shipping address", "navigation": "Address" },
+		"/cart/shipping-method": { "title": "Shipping method", "navigation": "Shipping" },
+		"/cart/payment-method": { "title": "Payment method", "navigation": "Payment" },
+		"/cart/summary": { "title": "Summary", "navigation": "Summary" },
+		"/cart/complete": { "title": "Completed!" }
 	},
 	"common": { "submit": "Submit", "loading": "Loading..." },
 	"domain": {
