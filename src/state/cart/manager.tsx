@@ -1,20 +1,31 @@
 "use client"
 
 import { useMachine } from "@xstate/react"
-import { type ReactNode, createContext, useContext } from "react"
+import { type ReactNode, createContext, useContext, useMemo } from "react"
 
 import { type TPaymentMethod } from "@components/payment/types"
 import { type TAddProduct } from "@components/product/types"
 import { type TShippingMethod, type TShippingAddress } from "@components/shipping/types"
 
 import { cartMachine } from "./machine"
-import { type CartMachineContext, EventType, type CartMachineState } from "./types"
+import {
+	type CartMachineContext,
+	EventType,
+	CartMachineState,
+	type CartMachineEvent,
+} from "./types"
 
-type CartState = Pick<
+export type CartState = Pick<
 	CartMachineContext,
 	"products" | "address" | "shippingMethod" | "paymentMethod"
 > & {
-	state: CartMachineState
+	allowedRoutes: {
+		canGoToCart: boolean
+		canGoToAddress: boolean
+		canGoToShipmentMethod: boolean
+		canGoToPaymentMethod: boolean
+		canGoToSummary: boolean
+	}
 	addProduct: (product: TAddProduct) => void
 	removeProduct: (id: string) => void
 	setAddress: (address: TShippingAddress) => void
@@ -55,9 +66,20 @@ const useCreateCartState = (): CartState => {
 		send({ type: EventType.SKIP_PAYMENT })
 	}
 
+	const allowedRoutes: CartState["allowedRoutes"] = useMemo(
+		() => ({
+			canGoToCart: state.value === CartMachineState.CART,
+			canGoToAddress: state.can({ type: EventType.ADDRESS } as CartMachineEvent),
+			canGoToShipmentMethod: state.can({ type: EventType.SELECT_SHIPPING } as CartMachineEvent),
+			canGoToPaymentMethod: state.can({ type: EventType.SELECT_PAYMENT } as CartMachineEvent),
+			canGoToSummary: state.can({ type: EventType.COMPLETE } as CartMachineEvent),
+		}),
+		[state.value, state.can],
+	)
+
 	return {
 		...state.context,
-		state: state.value,
+		allowedRoutes,
 		addProduct,
 		removeProduct,
 		setAddress,
