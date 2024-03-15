@@ -5,44 +5,58 @@ import { type ReactNode, useLayoutEffect } from "react"
 
 import { ROUTES } from "@/routes"
 
-import { useCartManager } from "@state/cart/manager"
+import { type CartState, useCartManager } from "@state/cart/manager"
 import { type CartMachineState } from "@state/cart/types"
 
 type Props = { children: ReactNode }
 
-const ALLOWED_ROUTES_FOR_STATE: Record<CartMachineState, (typeof ROUTES)[keyof typeof ROUTES][]> = {
-	CART: [ROUTES.CART, ROUTES.SHIPPING_ADDRESS],
-	ADDRESSED: [ROUTES.SHIPPING_METHOD, ROUTES.SHIPPING_ADDRESS],
-	SHIPPING_SELECTED: [ROUTES.PAYMENT_METHOD, ROUTES.SHIPPING_METHOD, ROUTES.SHIPPING_ADDRESS],
-	SHIPPING_SKIPPED: [ROUTES.PAYMENT_METHOD, ROUTES.SHIPPING_METHOD, ROUTES.SHIPPING_ADDRESS],
-	PAYMENT_SELECTED: [
-		ROUTES.SUMMARY,
-		ROUTES.PAYMENT_METHOD,
-		ROUTES.SHIPPING_METHOD,
-		ROUTES.SHIPPING_ADDRESS,
-	],
-	PAYMENT_SKIPPED: [
-		ROUTES.SUMMARY,
-		ROUTES.PAYMENT_METHOD,
-		ROUTES.SHIPPING_METHOD,
-		ROUTES.SHIPPING_ADDRESS,
-	],
-	COMPLETED: [ROUTES.COMPLETE],
+const ALLOWED_ROUTES_FOR_STATE: Record<
+	CartMachineState,
+	{ routes: (typeof ROUTES)[keyof typeof ROUTES][]; checks?: (keyof CartState["allowedRoutes"])[] }
+> = {
+	CART: { routes: [ROUTES.CART, ROUTES.SHIPPING_ADDRESS], checks: ["canGoToAddress"] },
+	ADDRESSED: { routes: [ROUTES.SHIPPING_METHOD, ROUTES.SHIPPING_ADDRESS] },
+	SHIPPING_SELECTED: {
+		routes: [ROUTES.PAYMENT_METHOD, ROUTES.SHIPPING_METHOD, ROUTES.SHIPPING_ADDRESS],
+	},
+	SHIPPING_SKIPPED: {
+		routes: [ROUTES.PAYMENT_METHOD, ROUTES.SHIPPING_METHOD, ROUTES.SHIPPING_ADDRESS],
+	},
+	PAYMENT_SELECTED: {
+		routes: [
+			ROUTES.SUMMARY,
+			ROUTES.PAYMENT_METHOD,
+			ROUTES.SHIPPING_METHOD,
+			ROUTES.SHIPPING_ADDRESS,
+		],
+	},
+	PAYMENT_SKIPPED: {
+		routes: [
+			ROUTES.SUMMARY,
+			ROUTES.PAYMENT_METHOD,
+			ROUTES.SHIPPING_METHOD,
+			ROUTES.SHIPPING_ADDRESS,
+		],
+	},
+	COMPLETED: { routes: [ROUTES.COMPLETE] },
 }
 
 export const RouteGuard = ({ children }: Props) => {
 	const pathname = usePathname()
 	const router = useRouter()
-	const { currentState } = useCartManager()
+	const { currentState, allowedRoutes } = useCartManager()
 
 	useLayoutEffect(() => {
-		const isLegalPath = ALLOWED_ROUTES_FOR_STATE[currentState].includes(pathname)
+		const allowedConfig = ALLOWED_ROUTES_FOR_STATE[currentState]
+		const isLegalPath = allowedConfig.routes.includes(pathname)
+		const passedChecks =
+			!allowedConfig.checks || allowedConfig.checks.every((check) => allowedRoutes[check])
 
-		if (!isLegalPath) {
-			const stateDefaultPath = ALLOWED_ROUTES_FOR_STATE[currentState][0]
+		if (!isLegalPath || !passedChecks) {
+			const stateDefaultPath = allowedConfig.routes[0]
 			router.replace(stateDefaultPath)
 		}
-	}, [currentState, pathname, router])
+	}, [allowedRoutes, currentState, pathname, router])
 
 	return children
 }
