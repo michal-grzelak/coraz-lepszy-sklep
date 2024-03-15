@@ -19,6 +19,7 @@ export type CartState = Pick<
 	CartMachineContext,
 	"products" | "address" | "shippingMethod" | "paymentMethod"
 > & {
+	currentState: CartMachineState
 	allowedRoutes: {
 		canGoToCart: boolean
 		canGoToAddress: boolean
@@ -86,6 +87,7 @@ const useCreateCartState = (): CartState => {
 
 	return {
 		...state.context,
+		currentState: state.value,
 		allowedRoutes,
 		addProduct,
 		removeProduct,
