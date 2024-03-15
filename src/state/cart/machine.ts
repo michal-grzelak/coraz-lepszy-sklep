@@ -1,54 +1,56 @@
-import { assign, setup } from "xstate"
+import { assign as _assign, setup } from "xstate"
 
-import { type TPaymentMethod } from "@components/payment/types"
-import { type TAddProduct } from "@components/product/types"
-import { type TShippingAddress, type TShippingMethod } from "@components/shipping/types"
 import { generateUid } from "@lib/id"
-import { type Address } from "@models/address"
-import { type PaymentMethod } from "@models/payment"
-import { type ProductDTO } from "@models/product"
-import { type ShippingMethod } from "@models/shipping"
 
-export enum CartMachineState {
-	CART = "CART",
-	ADDRESSED = "ADDRESSED",
-	SHIPPING_SELECTED = "SHIPPING_SELECTED",
-	SHIPPING_SKIPPED = "SHIPPING_SKIPPED",
-	PAYMENT_SELECTED = "PAYMENT_SELECTED",
-	PAYMENT_SKIPPED = "PAYMENT_SKIPPED",
-	COMPLETED = "COMPLETED",
-}
+import {
+	CartMachineState,
+	type CartMachineContext,
+	type CartMachineEvent,
+	EventType,
+	type AddProductEvent,
+	type RemoveProductEvent,
+	type AddressEvent,
+	type SelectShippingEvent,
+	type SkipShippingEvent,
+	type SelectPaymentEvent,
+	type SkipPaymentEvent,
+} from "./types"
 
-export enum EventType {
-	ADD_PRODUCT = "ADD_PRODUCT",
-	REMOVE_PRODUCT = "REMOVE_PRODUCT",
-	ADDRESS = "ADDRESS",
-	SELECT_SHIPPING = "SELECT_SHIPPING",
-	SKIP_SHIPPING = "SKIP_SHIPPING",
-	SELECT_PAYMENT = "SELECT_PAYMENT",
-	SKIP_PAYMENT = "SKIP_PAYMENT",
-	COMPLETE = "COMPLETE",
-}
+type TAssign<T> = typeof _assign<CartMachineContext, CartMachineEvent, T, CartMachineEvent, never>
 
-export interface CartMachineContext {
-	products: ProductDTO[]
-	address?: Address
-	shippingMethod?: ShippingMethod
-	paymentMethod?: PaymentMethod
-}
+const assign = <T = never>(args: Parameters<TAssign<T>>[0]) => (_assign as TAssign<T>)(args)
 
 export const cartMachine = setup({
 	types: {
 		context: {} as CartMachineContext,
-		events: {} as
-			| { type: EventType.ADD_PRODUCT; product: TAddProduct }
-			| { type: EventType.REMOVE_PRODUCT; id: string }
-			| { type: EventType.ADDRESS; address: TShippingAddress }
-			| { type: EventType.SELECT_SHIPPING; shippingMethod: TShippingMethod }
-			| { type: EventType.SKIP_SHIPPING }
-			| { type: EventType.SELECT_PAYMENT; paymentMethod: TPaymentMethod }
-			| { type: EventType.SKIP_PAYMENT }
-			| { type: EventType.COMPLETE },
+		events: {} as CartMachineEvent,
+	},
+	actions: {
+		addProduct: assign<AddProductEvent>({
+			products: ({ context }, params) => [
+				...context.products,
+				{ ...params.product, id: generateUid() },
+			],
+		}),
+		removeProduct: assign<RemoveProductEvent>({
+			products: ({ context }, params) =>
+				context.products.filter((product) => product.id !== params.id),
+		}),
+		address: assign<AddressEvent>({
+			address: (_, params) => params.address,
+		}),
+		selectShipping: assign<SelectShippingEvent>({
+			shippingMethod: (_, params) => params.shippingMethod.shippingMethod,
+		}),
+		skipShipping: assign<SkipShippingEvent>({
+			shippingMethod: () => undefined,
+		}),
+		selectPayment: assign<SelectPaymentEvent>({
+			paymentMethod: (_, params) => params.paymentMethod.paymentMethod,
+		}),
+		skipPayment: assign<SkipPaymentEvent>({
+			paymentMethod: () => undefined,
+		}),
 	},
 }).createMachine({
 	id: "cart",
@@ -59,8 +61,15 @@ export const cartMachine = setup({
 	states: {
 		[CartMachineState.CART]: {
 			on: {
+				[EventType.ADD_PRODUCT]: {
+					actions: [{ type: "addProduct", params: ({ event }) => event }],
+				},
+				[EventType.REMOVE_PRODUCT]: {
+					actions: [{ type: "removeProduct", params: ({ event }) => event }],
+				},
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 			},
 		},
@@ -68,12 +77,15 @@ export const cartMachine = setup({
 			on: {
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SELECTED,
+					actions: [{ type: "selectShipping", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 			},
 		},
@@ -81,18 +93,23 @@ export const cartMachine = setup({
 			on: {
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SELECTED,
+					actions: [{ type: "selectShipping", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SELECTED,
+					actions: [{ type: "selectPayment", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SKIPPED,
+					actions: [{ type: "skipPayment", params: ({ event }) => event }],
 				},
 			},
 		},
@@ -100,18 +117,23 @@ export const cartMachine = setup({
 			on: {
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SELECTED,
+					actions: [{ type: "selectShipping", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SELECTED,
+					actions: [{ type: "selectPayment", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SKIPPED,
+					actions: [{ type: "skipPayment", params: ({ event }) => event }],
 				},
 			},
 		},
@@ -119,18 +141,23 @@ export const cartMachine = setup({
 			on: {
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SELECTED,
+					actions: [{ type: "selectShipping", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SELECTED,
+					actions: [{ type: "selectPayment", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SKIPPED,
+					actions: [{ type: "skipPayment", params: ({ event }) => event }],
 				},
 				[EventType.COMPLETE]: {
 					target: CartMachineState.COMPLETED,
@@ -141,18 +168,23 @@ export const cartMachine = setup({
 			on: {
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SELECTED,
+					actions: [{ type: "selectShipping", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_SHIPPING]: {
 					target: CartMachineState.SHIPPING_SKIPPED,
+					actions: [{ type: "skipShipping", params: ({ event }) => event }],
 				},
 				[EventType.SELECT_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SELECTED,
+					actions: [{ type: "selectPayment", params: ({ event }) => event }],
 				},
 				[EventType.SKIP_PAYMENT]: {
 					target: CartMachineState.PAYMENT_SKIPPED,
+					actions: [{ type: "skipPayment", params: ({ event }) => event }],
 				},
 				[EventType.COMPLETE]: {
 					target: CartMachineState.COMPLETED,
@@ -160,51 +192,5 @@ export const cartMachine = setup({
 			},
 		},
 		[CartMachineState.COMPLETED]: {},
-	},
-	on: {
-		[EventType.ADD_PRODUCT]: {
-			actions: assign({
-				products: ({ context, event }) => [
-					...context.products,
-					{ ...event.product, id: generateUid() },
-				],
-			}),
-		},
-		[EventType.REMOVE_PRODUCT]: {
-			actions: assign({
-				products: ({ context, event }) =>
-					context.products.filter((product) => product.id !== event.id),
-			}),
-		},
-		[EventType.ADDRESS]: {
-			// target: CartState.ADDRESSED,
-			actions: assign({
-				address: ({ event }) => event.address,
-			}),
-		},
-		[EventType.SELECT_SHIPPING]: {
-			// target: CartState.SHIPPING_SELECTED,
-			actions: assign({
-				shippingMethod: ({ event }) => event.shippingMethod.shippingMethod,
-			}),
-		},
-		[EventType.SKIP_SHIPPING]: {
-			// target: CartState.SHIPPING_SKIPPED,
-			actions: assign({
-				shippingMethod: () => undefined,
-			}),
-		},
-		[EventType.SELECT_PAYMENT]: {
-			// target: CartState.PAYMENT_SELECTED,
-			actions: assign({
-				paymentMethod: ({ event }) => event.paymentMethod.paymentMethod,
-			}),
-		},
-		[EventType.SKIP_PAYMENT]: {
-			// target: CartState.PAYMENT_SKIPPED,
-			actions: assign({
-				paymentMethod: () => undefined,
-			}),
-		},
 	},
 })

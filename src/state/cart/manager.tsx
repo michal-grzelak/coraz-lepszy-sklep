@@ -7,7 +7,8 @@ import { type TPaymentMethod } from "@components/payment/types"
 import { type TAddProduct } from "@components/product/types"
 import { type TShippingMethod, type TShippingAddress } from "@components/shipping/types"
 
-import { type CartMachineContext, EventType, cartMachine, type CartMachineState } from "./machine"
+import { cartMachine } from "./machine"
+import { type CartMachineContext, EventType, type CartMachineState } from "./types"
 
 type CartState = Pick<
 	CartMachineContext,
