@@ -48,10 +48,13 @@ export const RouteGuard = ({ children }: Props) => {
 
 	useLayoutEffect(() => {
 		const allowedConfig = ALLOWED_ROUTES_FOR_STATE[currentState]
+
+		// check if path is legal for state
 		const isLegalPath = allowedConfig.routes.includes(pathname)
 		const passedChecks =
 			!allowedConfig.checks || allowedConfig.checks.every((check) => allowedRoutes[check])
 
+		// if not legal -> go to base path of state
 		if (!isLegalPath || !passedChecks) {
 			const stateDefaultPath = allowedConfig.routes[0]
 			router.replace(stateDefaultPath)
