@@ -7,7 +7,7 @@ import { type Path, useForm, type DefaultValues } from "react-hook-form"
 import { type z, type ZodSchema } from "zod"
 
 import { FormProvider } from "@base-ui/form"
-import { cn } from "@lib/utils"
+import { cn } from "@lib/cn"
 import { type ValidationError } from "@types"
 import { Button } from "@ui/button"
 
