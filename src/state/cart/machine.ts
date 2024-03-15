@@ -60,6 +60,7 @@ export const cartMachine = setup({
 
 			return true
 		},
+		canAddress: ({ context }) => !!context.products.length,
 	},
 }).createMachine({
 	id: "cart",
@@ -78,6 +79,7 @@ export const cartMachine = setup({
 				},
 				[EventType.ADDRESS]: {
 					target: CartMachineState.ADDRESSED,
+					guard: "canAddress",
 					actions: [{ type: "address", params: ({ event }) => event }],
 				},
 			},

@@ -82,7 +82,7 @@ const useCreateCartState = (): CartState => {
 			canGoToSummary: state.can({ type: EventType.COMPLETE } as CartMachineEvent),
 			canSkipShipping: state.can({ type: EventType.SKIP_SHIPPING } as CartMachineEvent),
 		}),
-		[state.value, state.can],
+		[state],
 	)
 
 	return {
