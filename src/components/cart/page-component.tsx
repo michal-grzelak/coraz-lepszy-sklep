@@ -29,8 +29,12 @@ export const CartPageComponent = () => {
 
 			<AddProductForm onSubmit={handleSubmit} />
 
-			<TotalPrice products={products} />
-			<CartList products={products} onRemove={handleRemove} />
+			<div className="flex justify-center">
+				<span className="w-3/4">
+					<TotalPrice products={products} />
+					<CartList products={products} onRemove={handleRemove} />
+				</span>
+			</div>
 		</>
 	)
 }
