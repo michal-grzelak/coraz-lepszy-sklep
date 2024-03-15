@@ -11,6 +11,7 @@
 	"domain": {
 		"product": {
 			"price": {
+				"total": "Total: {price, number, currency}",
 				"value": "{price, number, currency}",
 				"label": "Price",
 				"placeholder": "Product price"

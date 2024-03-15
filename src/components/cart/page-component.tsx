@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { ROUTES } from "@/routes"
 
 import { AddProductForm } from "@components/product/add-product-form"
+import { TotalPrice } from "@components/product/total-price"
 import { type TAddProduct } from "@components/product/types"
 import { useCartManager } from "@state/cart/manager"
 
@@ -28,6 +29,7 @@ export const CartPageComponent = () => {
 
 			<AddProductForm onSubmit={handleSubmit} />
 
+			<TotalPrice products={products} />
 			<CartList products={products} onRemove={handleRemove} />
 		</>
 	)
