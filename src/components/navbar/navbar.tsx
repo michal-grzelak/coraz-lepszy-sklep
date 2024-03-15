@@ -9,12 +9,18 @@ export const Navbar = () => {
 
 	return (
 		<nav>
-			<ul className="flex items-center p-small">
+			<ul className="flex items-center justify-between p-small">
 				<li className="mr-normal">
 					<ActiveLink href={ROUTES.CART} exact={false}>
 						{t(`routes.${ROUTES.CART}.title`)}
 					</ActiveLink>
 				</li>
+
+				<li className="">
+					<h1 className="text-4xl font-bold">Coraz Lepszy Sklep</h1>
+				</li>
+
+				<li></li>
 			</ul>
 		</nav>
 	)
